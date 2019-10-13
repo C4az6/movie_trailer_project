@@ -175,187 +175,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _default =
 {
   data: function data() {
     return {
-      carouselList: [] };
+      carouselList: [],
+      hotSuperHeroList: [] };
 
   },
   onLoad: function onLoad() {var _this = this;
+    // 查询轮播图
     uni.request({
-      url: this.baseUrl + '/index/carousel/list',
+      url: this.baseUrl + '/index/carousel/list?type=superhero',
       method: 'post',
       header: {
         'content-type': 'application/x-www-form-urlencoded' },
@@ -370,6 +201,22 @@ var _default =
       } });
 
 
+    // 查询热门英超
+    uni.request({
+      url: this.baseUrl + '/index/movie/hot',
+      method: 'post',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' },
+
+      data: {
+        qq: '1335436466',
+        type: 'superhero' },
+
+      success: function success(res) {
+        if (res.data.status === 200) {
+          _this.hotSuperHeroList = res.data.data;
+        }
+      } });
 
   },
   methods: {} };exports.default = _default;

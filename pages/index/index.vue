@@ -19,183 +19,12 @@
 		</view>
 		
 		<scroll-view scroll-x="true" class="page-block hot">
-			<view class="single-poster">
+			<view class="single-poster" v-for="item in hotSuperHeroList" :key="item.id">
 				<view class="poster-wapper">
-					<image src="../../static/poster/civilwar.jpg" class="poster"></image>
+					<image :src="item.cover" class="poster"></image>
 				</view>
 				<view class="movie-name">
-					蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠
-				</view>
-				<view class="movie-score-wapper">
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-gray.png" class="start-icon"></image>
-					<view class="movie-score">
-						9.1
-					</view>
-				</view>
-			</view>
-			
-			<view class="single-poster">
-				<view class="poster-wapper">
-					<image src="../../static/poster/civilwar.jpg" class="poster"></image>
-				</view>
-				<view class="movie-name">
-					蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠
-				</view>
-				<view class="movie-score-wapper">
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-gray.png" class="start-icon"></image>
-					<view class="movie-score">
-						9.1
-					</view>
-				</view>
-			</view>
-			
-			<view class="single-poster">
-				<view class="poster-wapper">
-					<image src="../../static/poster/civilwar.jpg" class="poster"></image>
-				</view>
-				<view class="movie-name">
-					蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠
-				</view>
-				<view class="movie-score-wapper">
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-gray.png" class="start-icon"></image>
-					<view class="movie-score">
-						9.1
-					</view>
-				</view>
-			</view>
-			
-			<view class="single-poster">
-				<view class="poster-wapper">
-					<image src="../../static/poster/civilwar.jpg" class="poster"></image>
-				</view>
-				<view class="movie-name">
-					蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠
-				</view>
-				<view class="movie-score-wapper">
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-gray.png" class="start-icon"></image>
-					<view class="movie-score">
-						9.1
-					</view>
-				</view>
-			</view>
-			
-			<view class="single-poster">
-				<view class="poster-wapper">
-					<image src="../../static/poster/civilwar.jpg" class="poster"></image>
-				</view>
-				<view class="movie-name">
-					蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠
-				</view>
-				<view class="movie-score-wapper">
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-gray.png" class="start-icon"></image>
-					<view class="movie-score">
-						9.1
-					</view>
-				</view>
-			</view>
-			
-			<view class="single-poster">
-				<view class="poster-wapper">
-					<image src="../../static/poster/civilwar.jpg" class="poster"></image>
-				</view>
-				<view class="movie-name">
-					蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠
-				</view>
-				<view class="movie-score-wapper">
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-gray.png" class="start-icon"></image>
-					<view class="movie-score">
-						9.1
-					</view>
-				</view>
-			</view>
-			
-			<view class="single-poster">
-				<view class="poster-wapper">
-					<image src="../../static/poster/civilwar.jpg" class="poster"></image>
-				</view>
-				<view class="movie-name">
-					蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠
-				</view>
-				<view class="movie-score-wapper">
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-gray.png" class="start-icon"></image>
-					<view class="movie-score">
-						9.1
-					</view>
-				</view>
-			</view>
-			
-			<view class="single-poster">
-				<view class="poster-wapper">
-					<image src="../../static/poster/civilwar.jpg" class="poster"></image>
-				</view>
-				<view class="movie-name">
-					蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠
-				</view>
-				<view class="movie-score-wapper">
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-gray.png" class="start-icon"></image>
-					<view class="movie-score">
-						9.1
-					</view>
-				</view>
-			</view>
-			
-			<view class="single-poster">
-				<view class="poster-wapper">
-					<image src="../../static/poster/civilwar.jpg" class="poster"></image>
-				</view>
-				<view class="movie-name">
-					蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠
-				</view>
-				<view class="movie-score-wapper">
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-gray.png" class="start-icon"></image>
-					<view class="movie-score">
-						9.1
-					</view>
-				</view>
-			</view>
-			
-			<view class="single-poster">
-				<view class="poster-wapper">
-					<image src="../../static/poster/civilwar.jpg" class="poster"></image>
-				</view>
-				<view class="movie-name">
-					蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠蝙蝠侠
+					{{item.name}}
 				</view>
 				<view class="movie-score-wapper">
 					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
@@ -217,12 +46,14 @@
 	export default {
 		data() {
 			return {
-				carouselList: []
+				carouselList: [],
+				hotSuperHeroList: []
 			}
 		},
 		onLoad() {
+			// 查询轮播图
 			uni.request({
-				url: this.baseUrl + '/index/carousel/list',
+				url: this.baseUrl + '/index/carousel/list?type=superhero',
 				method: 'post',
 				header:{
 					'content-type':'application/x-www-form-urlencoded'
@@ -235,8 +66,24 @@
 						this.carouselList = res.data.data
 					}
 				}
-
-
+			});
+			
+			// 查询热门英超
+			uni.request({
+				url: this.baseUrl + '/index/movie/hot',
+				method: 'post',
+				header:{
+					'content-type':'application/x-www-form-urlencoded'
+					},
+				data: {
+					qq: '1335436466',
+					type: 'superhero'
+				},
+				success: res => {
+					if (res.data.status === 200){
+						this.hotSuperHeroList = res.data.data
+					}
+				}
 			});
 		},
 		methods: {
