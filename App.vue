@@ -12,4 +12,7 @@
 		background-color: #f7f7f7;
 		position: absolute;
 	}
+	.page-block {
+		background-color: #fff;
+	}
 </style>
