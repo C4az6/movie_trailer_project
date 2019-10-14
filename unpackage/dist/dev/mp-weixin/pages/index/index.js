@@ -191,15 +191,63 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
   data: function data() {
     return {
       carouselList: [],
       hotSuperHeroList: [],
-      hotTrailerList: [] };
+      hotTrailerList: [],
+      guessULikeList: [],
+      animationData: {} };
+
 
   },
+  // 页面卸载时的生命周期函数
+  onUnload: function onUnload() {
+    // 页面卸载的时候清除动画数据
+    this.animationData = {};
+  },
   onLoad: function onLoad() {var _this = this;
+    // 在页面创建的时候，创建一个临时动画对象
+    this.animation = uni.createAnimation();
+
     // 查询轮播图
     uni.request({
       url: this.baseUrl + '/index/carousel/list?type=superhero',
@@ -249,13 +297,42 @@ __webpack_require__.r(__webpack_exports__);
       success: function success(res) {
         if (res.data.status === 200) {
           _this.hotTrailerList = res.data.data;
-          console.log(_this.hotTrailerList);
+        }
+      } });
+
+
+    // 查询猜你喜欢列表
+    uni.request({
+      url: this.baseUrl + '/index/guessULike',
+      method: 'post',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' },
+
+      data: {
+        qq: '1335436466' },
+
+      success: function success(res) {
+        if (res.data.status === 200) {
+          _this.guessULikeList = res.data.data;
         }
       } });
 
   },
-  methods: {},
+  methods: {
+    // 实现点赞动画效果
+    praiseMe: function praiseMe() {
+      // 构建动画数据，并且通过step来表示这组动画的完成
+      this.animation.translateY(-60).opacity(1).step({ duration: 400 });
 
+      // 导出动画数据到view组件，实现组件的动画效果
+      this.animationData = this.animation.export();
+
+      // 还原动画
+      setTimeout(function () {
+        this.animation.translateY(0).opacity(0).step({ duration: 0 });
+        this.animationData = this.animation.export();
+      }.bind(this), 500);
+    } },
 
   components: {
     // 注册自定义组件
