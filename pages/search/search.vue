@@ -77,7 +77,7 @@
 			}
 		},
 		onLoad() {
-			uni.showLoading({
+/* 			uni.showLoading({
 				mask: true,
 				title: "请稍后..."
 			});
@@ -104,10 +104,11 @@
 					// 拿到数据后隐藏loading效果
 					uni.hideLoading();
 					// 拿到数据后隐藏刷新效果
-
 				}
-			});
+			}); */
+			this.pagedTrailerList(this.keywords, 1, 15)
 		},
+		// 页面触底时的钩子函数
 		onReachBottom(){
 			let page = this.page + 1;		// 查询下一页面，当前页数累加1
 			let keywords = this.keywords;		// 获取当前页面中data里的搜索值
@@ -115,10 +116,9 @@
 			
 			// 如果当前需要分页的分页数和总页数相等，就不分页
 			if(page > totalPages) {
-				console.log(page, totalPages)
 				return;
 			}
-			
+			// 每页显示15条数据
 			this.pagedTrailerList(keywords,page,15)
 		}
 	}
