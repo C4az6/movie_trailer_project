@@ -1,6 +1,5 @@
 <template>
-	<view>
-		搜索页面
+	<view class="page">
 	</view>
 </template>
 
@@ -18,5 +17,5 @@
 </script>
 
 <style>
-
+@import url("search.css");
 </style>
