@@ -108,6 +108,19 @@
 				}
 			});
 		},
+		onReachBottom(){
+			let page = this.page + 1;		// 查询下一页面，当前页数累加1
+			let keywords = this.keywords;		// 获取当前页面中data里的搜索值
+			let totalPages = this.totalPages		// 获取总页数
+			
+			// 如果当前需要分页的分页数和总页数相等，就不分页
+			if(page > totalPages) {
+				console.log(page, totalPages)
+				return;
+			}
+			
+			this.pagedTrailerList(keywords,page,15)
+		}
 	}
 </script>
 
