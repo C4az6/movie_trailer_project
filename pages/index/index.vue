@@ -117,6 +117,10 @@
 			this.animationData = {}
 			this.animationDataArr = []
 		},
+		// 下拉刷新的钩子函数
+		onPullDownRefresh(){
+			this.refresh()
+		},
 		onLoad() {
 			// #ifdef APP-PLUS || MP-WEIXIN
 			// 在页面创建的时候，创建一个临时动画对象
@@ -158,6 +162,9 @@
 				}
 			});
 			
+			// 查询猜你喜欢数据列表
+			this.refresh()
+			
 			// 查询热门英超预告片
 			uni.request({
 				url: this.baseUrl + '/index/movie/hot',
@@ -176,24 +183,31 @@
 				}
 			});
 			
-			// 查询猜你喜欢列表
-			uni.request({
-				url: this.baseUrl + '/index/guessULike',
-				method: 'post',
-				header:{
-					'content-type':'application/x-www-form-urlencoded'
-					},
-				data: {
-					qq: '1335436466'
-				},
-				success: res => {
-					if (res.data.status === 200){
-						this.guessULikeList = res.data.data
-					}
-				}
-			});
+			
 		},
 		methods: {
+			refresh(){
+				// 查询猜你喜欢列表
+				uni.request({
+					url: this.baseUrl + '/index/guessULike',
+					method: 'post',
+					header:{
+						'content-type':'application/x-www-form-urlencoded'
+						},
+					data: {
+						qq: '1335436466'
+					},
+					success: res => {
+						if (res.data.status === 200){
+							this.guessULikeList = res.data.data
+						}
+					},
+					complete: ()=>{
+						uni.stopPullDownRefresh();
+					}
+				});
+				
+			},
 			// 实现点赞动画效果
 			praiseMe(e){
 				// #ifdef APP-PLUS || MP-WEIXIN
