@@ -23,7 +23,9 @@
 						<view class="movie-score">{{trailerInfo.score}}</view>
 					</view>
 					<view class="score-starts">
-						<trailerStars :innerScore="trailerInfo.score" showNum='0'></trailerStars>
+						<block v-if="trailerInfo.score >= 0">
+							<trailerStars :innerScore="trailerInfo.score" showNum='0'></trailerStars>
+						</block>
 						
 						<view class="prise-counts">{{trailerInfo.prisedCounts}} 人点赞</view>
 					</view>
