@@ -320,6 +320,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     refresh: function refresh() {var _this2 = this;
+      uni.showLoading({
+        mask: true });
+
+      // uni.showNavigationBarLoading();  导航栏加载效果
+
       // 查询猜你喜欢列表
       uni.request({
         url: this.baseUrl + '/index/guessULike',
@@ -336,7 +341,11 @@ __webpack_require__.r(__webpack_exports__);
           }
         },
         complete: function complete() {
+          // 拿到数据后隐藏loading效果
+          uni.hideLoading();
+          // 拿到数据后隐藏刷新效果
           uni.stopPullDownRefresh();
+
         } });
 
 

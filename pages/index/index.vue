@@ -187,6 +187,11 @@
 		},
 		methods: {
 			refresh(){
+				uni.showLoading({
+					mask: true
+				});
+				// uni.showNavigationBarLoading();  导航栏加载效果
+				
 				// 查询猜你喜欢列表
 				uni.request({
 					url: this.baseUrl + '/index/guessULike',
@@ -203,7 +208,11 @@
 						}
 					},
 					complete: ()=>{
+						// 拿到数据后隐藏loading效果
+						uni.hideLoading();
+						// 拿到数据后隐藏刷新效果
 						uni.stopPullDownRefresh();
+						
 					}
 				});
 				
