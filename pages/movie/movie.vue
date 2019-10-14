@@ -51,22 +51,26 @@
 			<scroll-view scroll-x="true" class="scroll-list">
 				<view 
 					class="actor-wapper" 
-					v-for="director in directorArray" 
+					v-for="(director,staffIndex) in directorArray" 
 					:key="director.staffId">
 					<image
 					:src="director.photo" 
 					mode="aspectFill"
+					@click="lookStaffs"
+					:data-staffIndex='staffIndex'
 					class="single-actor"></image>
 					<view class="actor-name">{{director.name}}</view>
 					<view class="actor-role">{{director.actName}}</view>
 				</view>
 				<view 
 				class="actor-wapper"
-				v-for="actor in actorArray"
+				v-for="(actor, actorIndex) in actorArray"
 				:key="actor.staffId">
 					<image
 					:src="actor.photo" 
 					mode="aspectFill"
+					@click="lookStaffs"
+					:data-staffIndex='actorIndex +directorArray.length'
 					class="single-actor"></image>
 					<view class="actor-name">{{actor.name}}</view>
 					<view class="actor-role">{{actor.actName}}</view>
@@ -80,11 +84,12 @@
 			<view class="plots-title">剧照</view>
 			<scroll-view scroll-x="true" class="scroll-list">
 				<image 
-				v-for="img in plotPicsArray" 
+				v-for="(img, imgIndex) in plotPicsArray" 
 				:key="img"
 				:src="img" 
 				mode="aspectFill"
-				class="plot-image"></image>
+				class="plot-image"
+				@click="lookMe(imgIndex)"></image>
 			</scroll-view>
 		</view>
 		<!-- 剧照 end -->
@@ -103,7 +108,32 @@
 			}
 		},
 		methods: {
-
+			// 演职人员预览
+			lookStaffs(e){
+				let staffIndex = e.currentTarget.dataset.staffindex;
+				// 拼接导演和演员的数组，成为一个新数组
+				let directorArray = this.directorArray;
+				let actorArray = this.actorArray;
+				let newStaffArray = [];
+				newStaffArray = newStaffArray.concat(directorArray).concat(actorArray)
+				
+				let urls = [];
+				for(var i = 0; i < newStaffArray.length; i++){
+					let tempPhoto = newStaffArray[i].photo;
+					urls.push(tempPhoto);
+				}
+				uni.previewImage({
+					urls: urls,
+					current: urls[staffIndex]
+				})
+			},
+			// 剧照预览
+			lookMe(imgIndex){
+				uni.previewImage({
+					urls: this.plotPicsArray,
+					current: this.plotPicsArray[imgIndex]
+				})
+			}
 		},
 		onLoad(params) {
 			// 获取上一个页面传入的参数
@@ -124,7 +154,6 @@
 						this.trailerInfo = res.data.data
 						// 把剧照的字符串转换成JSON array
 						this.plotPicsArray = JSON.parse(this.trailerInfo.plotPics)
-						console.log('plotPicsArray:', this.plotPicsArray)
 
 					}
 				}
