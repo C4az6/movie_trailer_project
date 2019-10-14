@@ -170,11 +170,33 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
   data: function data() {
     return {
       carouselList: [],
-      hotSuperHeroList: [] };
+      hotSuperHeroList: [],
+      hotTrailerList: [] };
 
   },
   onLoad: function onLoad() {var _this = this;
@@ -209,6 +231,25 @@ __webpack_require__.r(__webpack_exports__);
       success: function success(res) {
         if (res.data.status === 200) {
           _this.hotSuperHeroList = res.data.data;
+        }
+      } });
+
+
+    // 查询热门英超预告片
+    uni.request({
+      url: this.baseUrl + '/index/movie/hot',
+      method: 'post',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' },
+
+      data: {
+        qq: '1335436466',
+        type: 'trailer' },
+
+      success: function success(res) {
+        if (res.data.status === 200) {
+          _this.hotTrailerList = res.data.data;
+          console.log(_this.hotTrailerList);
         }
       } });
 

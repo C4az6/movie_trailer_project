@@ -88,3 +88,31 @@
 
 /* 热门超英 end */
 
+/* 热门预告 start*/
+.hot-movies {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-webkit-flex-wrap: wrap;
+	    -ms-flex-wrap: wrap;
+	        flex-wrap: wrap;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between;
+	padding: 0rpx 20rpx 20rpx 20rpx;
+}
+.hot-movie-single {
+	width: 350rpx;
+	height: 220rpx;
+	margin-top: 10rpx;
+}
+
+/* 热门预告 end */
+

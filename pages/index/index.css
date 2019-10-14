@@ -76,3 +76,18 @@
 }
 
 /* 热门超英 end */
+
+/* 热门预告 start*/
+.hot-movies {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 0upx 20upx 20upx 20upx;
+}
+.hot-movie-single {
+	width: 350upx;
+	height: 220upx;
+	margin-top: 10upx;
+}
+/* 热门预告 end */

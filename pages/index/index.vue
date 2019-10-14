@@ -31,6 +31,27 @@
 			</view>
 		</scroll-view>
 		<!-- 热门超英end -->
+		
+		<!-- 热门英超预告片 start -->
+		<view class="page-block super-hot">
+			<view class="hot-title-wapper">
+				<image src="../../static/icos/interest.png" class="hot-ico"></image>
+				<view class="hot-title">
+					热门预告
+				</view>
+			</view>
+		</view>
+		
+		<view class="hot-movies page-block">
+			<video 
+			v-for="item in hotTrailerList"
+			:key="item.id"
+			:src="item.trailer" 
+			:poster="item.poster"
+			class="hot-movie-single"
+			controls></video>
+		</view>
+		<!-- 热门英超预告片 end -->
 	</view>
 </template>
 
@@ -41,7 +62,8 @@
 		data() {
 			return {
 				carouselList: [],
-				hotSuperHeroList: []
+				hotSuperHeroList: [],
+				hotTrailerList: []
 			}
 		},
 		onLoad() {
@@ -76,6 +98,25 @@
 				success: res => {
 					if (res.data.status === 200){
 						this.hotSuperHeroList = res.data.data
+					}
+				}
+			});
+			
+			// 查询热门英超预告片
+			uni.request({
+				url: this.baseUrl + '/index/movie/hot',
+				method: 'post',
+				header:{
+					'content-type':'application/x-www-form-urlencoded'
+					},
+				data: {
+					qq: '1335436466',
+					type: 'trailer'
+				},
+				success: res => {
+					if (res.data.status === 200){
+						this.hotTrailerList = res.data.data
+						console.log(this.hotTrailerList)
 					}
 				}
 			});
