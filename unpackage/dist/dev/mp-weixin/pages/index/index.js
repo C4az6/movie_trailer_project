@@ -131,7 +131,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var trailerStars = function trailerStars() {return __webpack_require__.e(/*! import() | components/trailerStars */ "components/trailerStars").then(__webpack_require__.bind(null, /*! ../../components/trailerStars.vue */ 43));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var trailerStars = function trailerStars() {return __webpack_require__.e(/*! import() | components/trailerStars */ "components/trailerStars").then(__webpack_require__.bind(null, /*! ../../components/trailerStars.vue */ 53));};var _default =
 
 
 
@@ -319,6 +319,13 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   methods: {
+    // 跳转电影详情页面
+    showTrailer: function showTrailer(trailerId) {
+      // 页面跳转接口API
+      uni.navigateTo({
+        url: "../movie/movie?trailerId=".concat(trailerId) });
+
+    },
     refresh: function refresh() {var _this2 = this;
       uni.showLoading({
         mask: true });

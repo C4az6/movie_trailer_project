@@ -21,7 +21,7 @@
 		<scroll-view scroll-x="true" class="page-block hot">
 			<view class="single-poster" v-for="item in hotSuperHeroList" :key="item.id">
 				<view class="poster-wapper">
-					<image :src="item.cover" class="poster"></image>
+					<image :src="item.cover" class="poster" @click="showTrailer(item.id)"></image>
 				</view>
 				<view class="movie-name">
 					{{item.name}}
@@ -186,6 +186,13 @@
 			
 		},
 		methods: {
+			// 跳转电影详情页面
+			showTrailer(trailerId){
+				// 页面跳转接口API
+				uni.navigateTo({
+					url: `../movie/movie?trailerId=${trailerId}`
+				})
+			},
 			refresh(){
 				uni.showLoading({
 					mask: true
