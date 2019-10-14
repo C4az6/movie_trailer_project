@@ -2,7 +2,7 @@
 	<view class="page">
 		<!-- 视频播放 start -->
 		<view class="player">
-			<video :src="trailerInfo.trailer" :poster="trailerInfo.poster" class="movie" controls></video>
+			<video id="myTrailer" :src="trailerInfo.trailer" :poster="trailerInfo.poster" class="movie" controls></video>
 		</view>
 		<!-- 视频播放 end -->
 
@@ -135,6 +135,20 @@
 					current: this.plotPicsArray[imgIndex]
 				})
 			}
+		},
+		// 页面初次渲染完成，获得视频对象
+		onReady() {
+			this.videoContext = uni.createVideoContext('myTrailer');
+		},
+		onHide(){
+			// 页面被隐藏的时候暂停播放
+			this.videoContext.pause();
+		},
+		onShow(){
+			// 页面被再次显示的时候，可以继续播放
+			// if(this.videoContext){
+			// 	this.videoContext.play();
+			// }
 		},
 		onLoad(params) {
 			// 获取上一个页面传入的参数

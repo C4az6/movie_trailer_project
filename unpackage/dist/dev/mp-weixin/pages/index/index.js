@@ -228,6 +228,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 {
   data: function data() {
     return {
@@ -253,6 +256,11 @@ __webpack_require__.r(__webpack_exports__);
   // 下拉刷新的钩子函数
   onPullDownRefresh: function onPullDownRefresh() {
     this.refresh();
+  },
+  onHide: function onHide() {
+    if (this.videoContext) {
+      this.videoContext.pause();
+    }
   },
   onLoad: function onLoad() {var _this = this;
 
@@ -319,6 +327,20 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   methods: {
+    // 播放一个视频的时候，需要暂停其他正在播放的视频
+    meIsPlaying: function meIsPlaying(e) {
+      var trailerId = "";
+      if (e) {
+        trailerId = e.currentTarget.dataset.playindex;
+        this.videoContext = uni.createVideoContext(trailerId);
+        for (var i = 0; i < this.hotTrailerList.length; i++) {
+          var tempId = this.hotTrailerList[i].id;
+          if (tempId != trailerId) {
+            uni.createVideoContext(tempId).pause();
+          }
+        }
+      }
+    },
     // 跳转电影详情页面
     showTrailer: function showTrailer(trailerId) {
       // 页面跳转接口API

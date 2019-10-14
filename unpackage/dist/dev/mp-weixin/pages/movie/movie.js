@@ -260,6 +260,20 @@ __webpack_require__.r(__webpack_exports__);
 
     } },
 
+  // 页面初次渲染完成，获得视频对象
+  onReady: function onReady() {
+    this.videoContext = uni.createVideoContext('myTrailer');
+  },
+  onHide: function onHide() {
+    // 页面被隐藏的时候暂停播放
+    this.videoContext.pause();
+  },
+  onShow: function onShow() {
+    // 页面被再次显示的时候，可以继续播放
+    // if(this.videoContext){
+    // 	this.videoContext.play();
+    // }
+  },
   onLoad: function onLoad(params) {var _this = this;
     // 获取上一个页面传入的参数
     var trailerId = params.trailerId;
