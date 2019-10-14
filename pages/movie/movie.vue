@@ -26,24 +26,68 @@
 						<block v-if="trailerInfo.score >= 0">
 							<trailerStars :innerScore="trailerInfo.score" showNum='0'></trailerStars>
 						</block>
-						
+
 						<view class="prise-counts">{{trailerInfo.prisedCounts}} 人点赞</view>
 					</view>
 				</view>
 			</view>
 		</view>
 		<!-- 影片基本信息 end -->
-		
+
 		<view class="line-wapper">
 			<view class="line"></view>
 		</view>
-		
+
 		<!-- 剧情介绍 start -->
 		<view class="plots-block">
 			<view class="plots-title">剧情介绍</view>
 			<view class="plots-desc">{{trailerInfo.plotDesc}}</view>
 		</view>
 		<!-- 剧情介绍 end -->
+		
+		<!-- 演职人员 start -->
+		<view class="scroll-block">
+			<view class="plots-title">演职人员</view>
+			<scroll-view scroll-x="true" class="scroll-list">
+				<view 
+					class="actor-wapper" 
+					v-for="director in directorArray" 
+					:key="director.staffId">
+					<image
+					:src="director.photo" 
+					mode="aspectFill"
+					class="single-actor"></image>
+					<view class="actor-name">{{director.name}}</view>
+					<view class="actor-role">{{director.actName}}</view>
+				</view>
+				<view 
+				class="actor-wapper"
+				v-for="actor in actorArray"
+				:key="actor.staffId">
+					<image
+					:src="actor.photo" 
+					mode="aspectFill"
+					class="single-actor"></image>
+					<view class="actor-name">{{actor.name}}</view>
+					<view class="actor-role">{{actor.actName}}</view>
+				</view>
+			</scroll-view>
+		</view>
+		<!-- 演职人员 end -->
+		
+		<!-- 剧照 start -->
+		<view class="scroll-block">
+			<view class="plots-title">剧照</view>
+			<scroll-view scroll-x="true" class="scroll-list">
+				<image 
+				v-for="img in plotPicsArray" 
+				:key="img"
+				:src="img" 
+				mode="aspectFill"
+				class="plot-image"></image>
+			</scroll-view>
+		</view>
+		<!-- 剧照 end -->
 	</view>
 </template>
 
@@ -52,7 +96,10 @@
 	export default {
 		data() {
 			return {
-				trailerInfo: {}
+				trailerInfo: {},
+				plotPicsArray: [], // 剧照
+				directorArray: [], // 导演列表
+				actorArray: [], // 演员列表
 			}
 		},
 		methods: {
@@ -75,9 +122,48 @@
 				success: res => {
 					if (res.data.status === 200) {
 						this.trailerInfo = res.data.data
+						// 把剧照的字符串转换成JSON array
+						this.plotPicsArray = JSON.parse(this.trailerInfo.plotPics)
+						console.log('plotPicsArray:', this.plotPicsArray)
+
 					}
 				}
 			});
+
+			// 获取导演数据信息
+			uni.request({
+				url: this.baseUrl + `/search/staff/${trailerId}/${1}`,
+				method: 'post',
+				header: {
+					'content-type': 'application/x-www-form-urlencoded'
+				},
+				data: {
+					qq: '1335436466'
+				},
+				success: res => {
+					if (res.data.status === 200) {
+						this.directorArray = res.data.data
+					}
+				}
+			});
+
+			// 获取演员数据信息
+			uni.request({
+				url: this.baseUrl + `/search/staff/${trailerId}/${2}`,
+				method: 'post',
+				header: {
+					'content-type': 'application/x-www-form-urlencoded'
+				},
+				data: {
+					qq: '1335436466'
+				},
+				success: res => {
+					if (res.data.status === 200) {
+						this.actorArray = res.data.data
+					}
+				}
+			});
+
 		},
 		components: {
 			trailerStars
@@ -86,5 +172,5 @@
 </script>
 
 <style>
-@import url("movie.css");
+	@import url("movie.css");
 </style>
