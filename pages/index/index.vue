@@ -26,16 +26,8 @@
 				<view class="movie-name">
 					{{item.name}}
 				</view>
-				<view class="movie-score-wapper">
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-yellow.png" class="start-icon"></image>
-					<image src="../../static/icos/star-gray.png" class="start-icon"></image>
-					<view class="movie-score">
-						9.1
-					</view>
-				</view>
+				<!-- 使用评分组件 -->
+				<trailerStars :innerScore="item.score" showNum='1'></trailerStars>
 			</view>
 		</scroll-view>
 		<!-- 热门超英end -->
@@ -43,6 +35,8 @@
 </template>
 
 <script>
+	// 引入自定义评分组件
+	import trailerStars from '../../components/trailerStars.vue'
 	export default {
 		data() {
 			return {
@@ -88,6 +82,10 @@
 		},
 		methods: {
 
+		},
+		components: {
+			// 注册自定义组件
+			trailerStars
 		}
 	}
 </script>
