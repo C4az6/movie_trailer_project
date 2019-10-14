@@ -195,6 +195,38 @@
 			});
 
 		},
+		// 此函数仅仅只支持在小程序端的分享，分享到微信群和微信好友
+		onShareAppMessage(res) {
+			return {
+				title: this.trailerInfo.name,
+				path: `/pages/movie/movie?trailerId=${this.trailerInfo.id}`
+			}
+		},
+		// 监听导航栏的按钮
+		onNavigationBarButtonTap(e){
+			let index = e.index;
+			let trailerInfo = this.trailerInfo;
+			let trailerId = trailerInfo.id;
+			let trailerName = trailerInfo.name;
+			let cover = trailerInfo.cover;
+			let poster = trailerInfo.poster;
+			
+			if (index == 0) {
+				// 分享
+				uni.share({
+					provider: "weixin",
+					scene: "WXSenceTimeline",
+					type: 0,
+					href: `https://www.imovietrailer.com/#/pages/movie/movie?trailerId=${trailerId}`,
+					title: `NEXT超英预告：${trailerName}`,
+					summary: `NEXT超英预告：${trailerName}`,
+					imageUrl: cover,
+					success: (res) => {
+						console.log(res)
+					}
+				})
+			}
+		},
 		components: {
 			trailerStars
 		}

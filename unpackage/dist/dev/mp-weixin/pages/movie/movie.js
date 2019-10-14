@@ -319,6 +319,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
   },
+  // 此函数仅仅只支持在小程序端的分享，分享到微信群和微信好友
+  onShareAppMessage: function onShareAppMessage(res) {
+    return {
+      title: this.trailerInfo.name,
+      path: "/pages/movie/movie?trailerId=".concat(this.trailerInfo.id) };
+
+  },
+  // 监听导航栏的按钮
+  onNavigationBarButtonTap: function onNavigationBarButtonTap(e) {
+    var index = e.index;
+    var trailerInfo = this.trailerInfo;
+    var trailerId = trailerInfo.id;
+    var trailerName = trailerInfo.name;
+    var cover = trailerInfo.cover;
+    var poster = trailerInfo.poster;
+
+    if (index == 0) {
+      // 分享
+      uni.share({
+        provider: "weixin",
+        scene: "WXSenceTimeline",
+        type: 0,
+        href: "https://www.imovietrailer.com/#/pages/movie/movie?trailerId=".concat(trailerId),
+        title: "NEXT\u8D85\u82F1\u9884\u544A\uFF1A".concat(trailerName),
+        summary: "NEXT\u8D85\u82F1\u9884\u544A\uFF1A".concat(trailerName),
+        imageUrl: cover,
+        success: function success(res) {
+          console.log(res);
+        } });
+
+    }
+  },
   components: {
     trailerStars: trailerStars } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

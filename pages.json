@@ -6,7 +6,7 @@
 				"app-plus": {
 					"titleNView": false // 禁用原生导航栏
 				},
-				"enablePullDownRefresh": true	// 开启单页面下拉刷新功能
+				"enablePullDownRefresh": true // 开启单页面下拉刷新功能
 			}
 		}, {
 			"path": "pages/search/search",
@@ -16,22 +16,26 @@
 		}, {
 			"path": "pages/me/me",
 			"style": {}
-		}
-	    ,{
-            "path" : "pages/movie/movie",
-            "style" : {
+		}, {
+			"path": "pages/movie/movie",
+			"style": {
 				"app-plus": {
-					"titleNView":{
-						"type":"transparent"
+					"titleNView": {
+						"type": "transparent",
+						"buttons": [
+							{
+								"type":"share"
+							}
+						]
+
 					}
 				}
 			}
-        }
-        ,{
-            "path" : "pages/cover/cover",
-            "style" : {}
-        }
-    ],
+		}, {
+			"path": "pages/cover/cover",
+			"style": {}
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "预告之家",

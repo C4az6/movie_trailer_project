@@ -138,7 +138,7 @@ var _default =
   methods: {
     operator: function operator() {var _this = this;
       uni.showActionSheet({
-        itemList: ["保存图片到本地", "AAA", "BBB"],
+        itemList: ["保存图片到本地"],
         success: function success(res) {
           // 下标为0则下载
           if (res.tapIndex == 0) {
