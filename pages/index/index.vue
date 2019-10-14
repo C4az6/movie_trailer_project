@@ -64,7 +64,7 @@
 		</view>
 		
 		<view class="page-block guess-u-like">
-			<view class="single-like-movie" v-for="item in guessULikeList" :key="item.id">
+			<view class="single-like-movie" v-for="(item,guessIndex) in guessULikeList" :key="item.id">
 				<image :src="item.cover" class="like-movie"></image>
 				<view class="movie-desc">
 					<view class="movie-title">
@@ -78,12 +78,12 @@
 						{{item.releaseDate}}
 					</view>
 				</view>
-				<view class="movie-oper" @click="praiseMe">
+				<view class="movie-oper" :data-gIndex="guessIndex" @click="praiseMe">
 					<image src="/static/icos/praise.png" class="praise-ico"></image>
 					<view class="praise-me">
 						点赞
 					</view>
-					<view :animation="animationData" class="animation-opacity praise-me">+1</view>
+					<view :animation="animationDataArr[guessIndex]" class="animation-opacity praise-me">+1</view>
 				</view>
 			</view>
 		</view>
@@ -102,7 +102,12 @@
 				hotSuperHeroList: [],
 				hotTrailerList: [],
 				guessULikeList: [],
-				animationData: {}
+				
+				animationData: {},
+				animationDataArr: [
+					// {},{},{},{},{}
+				]
+				
 				
 			}
 		},
@@ -110,10 +115,13 @@
 		onUnload(){
 			// 页面卸载的时候清除动画数据
 			this.animationData = {}
+			this.animationDataArr = []
 		},
 		onLoad() {
+			// #ifdef APP-PLUS || MP-WEIXIN
 			// 在页面创建的时候，创建一个临时动画对象
 			this.animation = uni.createAnimation()
+			// #endif
 			
 			// 查询轮播图
 			uni.request({
@@ -187,18 +195,25 @@
 		},
 		methods: {
 			// 实现点赞动画效果
-			praiseMe(){
+			praiseMe(e){
+				// #ifdef APP-PLUS || MP-WEIXIN
+				let guessIndex = e.currentTarget.dataset.gindex
 				// 构建动画数据，并且通过step来表示这组动画的完成
 				this.animation.translateY(-60).opacity(1).step({duration: 400});
 				
 				// 导出动画数据到view组件，实现组件的动画效果
-				this.animationData = this.animation.export();
+				// this.animationData = this.animation.export();
+				this.animationData = this.animation;
+				this.animationDataArr[guessIndex] = this.animationData.export();
 				
 				// 还原动画
 				setTimeout(function() {
 					this.animation.translateY(0).opacity(0).step({duration: 0});
-					this.animationData = this.animation.export();
+					// this.animationData = this.animation.export();
+					this.animationData = this.animation;
+					this.animationDataArr[guessIndex] = this.animationData.export();
 				}.bind(this), 500);
+				// #endif
 			}
 		},
 		components: {

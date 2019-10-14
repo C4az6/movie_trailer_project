@@ -235,7 +235,12 @@ __webpack_require__.r(__webpack_exports__);
       hotSuperHeroList: [],
       hotTrailerList: [],
       guessULikeList: [],
-      animationData: {} };
+
+      animationData: {},
+      animationDataArr: [
+        // {},{},{},{},{}
+      ] };
+
 
 
   },
@@ -243,10 +248,13 @@ __webpack_require__.r(__webpack_exports__);
   onUnload: function onUnload() {
     // 页面卸载的时候清除动画数据
     this.animationData = {};
+    this.animationDataArr = [];
   },
   onLoad: function onLoad() {var _this = this;
+
     // 在页面创建的时候，创建一个临时动画对象
     this.animation = uni.createAnimation();
+
 
     // 查询轮播图
     uni.request({
@@ -320,18 +328,25 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     // 实现点赞动画效果
-    praiseMe: function praiseMe() {
+    praiseMe: function praiseMe(e) {
+
+      var guessIndex = e.currentTarget.dataset.gindex;
       // 构建动画数据，并且通过step来表示这组动画的完成
       this.animation.translateY(-60).opacity(1).step({ duration: 400 });
 
       // 导出动画数据到view组件，实现组件的动画效果
-      this.animationData = this.animation.export();
+      // this.animationData = this.animation.export();
+      this.animationData = this.animation;
+      this.animationDataArr[guessIndex] = this.animationData.export();
 
       // 还原动画
       setTimeout(function () {
         this.animation.translateY(0).opacity(0).step({ duration: 0 });
-        this.animationData = this.animation.export();
+        // this.animationData = this.animation.export();
+        this.animationData = this.animation;
+        this.animationDataArr[guessIndex] = this.animationData.export();
       }.bind(this), 500);
+
     } },
 
   components: {
