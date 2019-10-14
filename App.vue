@@ -14,4 +14,12 @@
 	.page-block {
 		background-color: #fff;
 	}
+	.line-wapper {
+		padding: 0upx 20upx;
+	}
+	
+	.line {
+		height: 1px;
+		background-color: #DBDBDA;
+	}
 </style>

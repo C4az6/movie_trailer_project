@@ -33,6 +33,17 @@
 			</view>
 		</view>
 		<!-- 影片基本信息 end -->
+		
+		<view class="line-wapper">
+			<view class="line"></view>
+		</view>
+		
+		<!-- 剧情介绍 start -->
+		<view class="plots-block">
+			<view class="plots-title">剧情介绍</view>
+			<view class="plots-desc">{{trailerInfo.plotDesc}}</view>
+		</view>
+		<!-- 剧情介绍 end -->
 	</view>
 </template>
 
