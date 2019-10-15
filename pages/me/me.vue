@@ -15,7 +15,9 @@
 				<view class="nav-info">ID: 123456789wasd</view>
 			</view>
 			<view v-else>
-				<view class="nickname regist-login">登录 / 注册</view>
+				<navigator url="../registLogin/registLogin">
+					<view class="nickname regist-login">登录 / 注册</view>
+				</navigator>
 			</view>
 
 			<view class="set-wapper" v-if="userIsLogin">
