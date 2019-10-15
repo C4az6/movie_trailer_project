@@ -46,6 +46,14 @@
             "path" : "pages/registLogin/registLogin",
             "style" : {}
         }
+        ,{
+            "path" : "pages/meInfo/meInfo",
+            "style": {
+            	"navigationBarTextStyle": "white",
+            	"navigationBarTitleText": "我的",
+            	"navigationBarBackgroundColor": "#ffd655"
+            }
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
