@@ -16,7 +16,7 @@
 				<view class="basic-info">{{trailerInfo.basicInfo}}</view>
 				<view class="basic-info">{{trailerInfo.originalName}}</view>
 				<view class="basic-info">{{trailerInfo.totalTime}}</view>
-				<view class="basic-info">{{trailerInfo.releaseDate}}</view>
+				<view class="basic-info"><strong></strong>{{trailerInfo.releaseDate}}</view>
 
 				<view class="score-block">
 					<view class="big-score">

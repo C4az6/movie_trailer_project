@@ -3,7 +3,7 @@
 		<view class="header">
 			<view v-if="userIsLogin">
 				<!-- 用户如果登录了，就显示用户自己头像 -->
-				<image src="../../static/icos/108x108.png" class="face"></image>
+				<image :src="userInfo.faceImage" class="face"></image>
 			</view>
 			<view v-else>
 				<!-- 用户如果没有登录，就显示默认头像 -->
@@ -11,8 +11,8 @@
 			</view>
 	
 			<view class="info-wapper" v-if="userIsLogin">
-				<view class="nickname">NEXT 学院</view>
-				<view class="nav-info">ID: 123456789wasd</view>
+				<view class="nickname">{{userInfo.nickname}}</view>
+				<view class="nav-info">{{userInfo.id}}</view>
 			</view>
 			<view v-else>
 				<navigator url="../registLogin/registLogin">
@@ -32,11 +32,24 @@
 		data() {
 			return {
 				// 默认用户是未登录状态
-				userIsLogin: false
+				userIsLogin: false,
+				userInfo: {}
 			}
 		},
 		methods: {
 
+		},
+		// 页面显示时候的生命周期函数
+		onShow(){
+			// 用户状态的切换
+			let userInfo = uni.getStorageSync("userInfo");
+			if(userInfo != null && userInfo != "" && userInfo != undefined) {
+				this.userIsLogin = true;
+				this.userInfo = userInfo
+			}else {
+				this.userIsLogin = false;
+				this.userInfo = {};
+			}
 		}
 	}
 </script>
