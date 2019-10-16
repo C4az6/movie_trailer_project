@@ -82,7 +82,7 @@
 		<!-- 底部 -->
 		<view class="footer-wapper">
 			<view class="footer-words" @click="clearStorage">清理缓存</view>
-			<view class="footer-words" style="margin-top: 10upx;">退出登录</view>
+			<view class="footer-words" style="margin-top: 10upx;" @click="logout">退出登录</view>
 		</view>
 	</view>
 </template>
@@ -95,6 +95,26 @@
 			}
 		},
 		methods: {
+			// 用户退出登录
+			logout(){
+				// 获取localStorage里面的用户信息
+				let userInfo = this.getGlobalUser('userInfo');
+				// 发送退出登录的请求
+				uni.request({
+					url: this.baseUrl + `/user/logout?userId=${userInfo.id}&&qq=1335436466`,
+					method: 'POST',
+					success: (res) => {
+						if(res.data.status==200){
+							uni.removeStorageSync("userInfo");
+							uni.switchTab({
+								url: '../me/me'
+							})
+						}
+					}
+				})
+				
+			},
+			// 清理缓存按钮
 			clearStorage(){
 				uni.clearStorageSync();
 				uni.showToast({
