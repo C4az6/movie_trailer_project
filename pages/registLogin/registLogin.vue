@@ -16,6 +16,33 @@
 			</view>
 
 			<button type="primary" form-type="submit" style="margin-top: 60upx; width:80%">注册 / 登录</button>
+			
+			<!-- 第三方登录H5不支持，所以隐藏掉 -->
+			<!-- #ifndef H5 -->
+			<view class="third-wapper">
+				<view class="third-line">
+					<view class="single-line">
+						<view class="line"></view>
+					</view>
+					<view class="third-words">第三方账号登录</view>
+					<view class="single-line">
+						<view class="line"></view>
+					</view>
+				</view>
+				
+				<view class="thrid-icos-wapper">
+					<!-- 5+app 用qq登录 小程序用微信小程序登录h5不支持 -->
+					<!-- #ifdef APP-PLUS -->
+						<image src="../../static/icos/weixin.png" class="third-ico"></image>
+						<image src="../../static/icos/QQ.png" class="third-ico" style="margin-left: 80upx;"></image>
+						<image src="../../static/icos/weibo.png" class="third-ico" style="margin-left: 80upx;"></image>
+					<!-- #endif -->
+					<!-- #ifdef MP-WEIXIN -->
+						<button open-type="getUserInfo" @getUserinfo="wxLogin" class="third-btn-ico"></button>
+					<!-- #endif -->
+				</view>
+			</view>
+			<!-- #endif -->
 		</form>
 	</view>
 </template>

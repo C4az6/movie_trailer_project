@@ -5,7 +5,8 @@
     "pages/me/me",
     "pages/movie/movie",
     "pages/cover/cover",
-    "pages/registLogin/registLogin"
+    "pages/registLogin/registLogin",
+    "pages/meInfo/meInfo"
   ],
   "window": {
     "navigationBarTextStyle": "black",

@@ -4,7 +4,9 @@
     "pages/search/search",
     "pages/me/me",
     "pages/movie/movie",
-    "pages/cover/cover"
+    "pages/cover/cover",
+    "pages/registLogin/registLogin",
+    "pages/meInfo/meInfo"
   ],
   "subPackages": [],
   "window": {
