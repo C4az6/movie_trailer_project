@@ -16,8 +16,8 @@
 			</view>
 
 			<button type="primary" form-type="submit" style="margin-top: 60upx; width:80%">注册 / 登录</button>
-			
-			<!-- 第三方登录H5不支持，所以隐藏掉 -->
+
+			<!-- 第三方登录H5不支持，下面代码只在除H5平台以外的平台上编译 -->
 			<!-- #ifndef H5 -->
 			<view class="third-wapper">
 				<view class="third-line">
@@ -29,16 +29,16 @@
 						<view class="line"></view>
 					</view>
 				</view>
-				
+
 				<view class="thrid-icos-wapper">
 					<!-- 5+app 用qq登录 小程序用微信小程序登录h5不支持 -->
 					<!-- #ifdef APP-PLUS -->
-						<image src="../../static/icos/weixin.png" class="third-ico"></image>
-						<image src="../../static/icos/QQ.png" class="third-ico" style="margin-left: 80upx;"></image>
-						<image src="../../static/icos/weibo.png" class="third-ico" style="margin-left: 80upx;"></image>
+					<image src="../../static/icos/weixin.png" class="third-ico"></image>
+					<image src="../../static/icos/QQ.png" class="third-ico" style="margin-left: 80upx;"></image>
+					<image src="../../static/icos/weibo.png" class="third-ico" style="margin-left: 80upx;"></image>
 					<!-- #endif -->
 					<!-- #ifdef MP-WEIXIN -->
-						<button open-type="getUserInfo" @getUserinfo="wxLogin" class="third-btn-ico"></button>
+					<button open-type="getUserInfo" @getuserinfo="wxLogin" class="third-btn-ico"></button>
 					<!-- #endif -->
 				</view>
 			</view>
@@ -50,10 +50,41 @@
 <script>
 	export default {
 		data() {
-			return {
-			}
+			return {}
 		},
 		methods: {
+			wxLogin(e) {
+				let wxUserInfo = e.detail.userInfo;
+				console.log(wxUserInfo);
+				// 实现微信登录
+				uni.login({
+					provider: "weixin",
+					success: (res) => {
+						// console.log(res)
+						// 获得微信登录的code授权码
+						let code = res.code;
+						console.log(code)
+						uni.request({
+							url: this.baseUrl + `/stu/mpWXLogin/${code}`,
+							method: 'POST',
+							header: {
+								'content-type': 'application/x-www-form-urlencoded'
+							},
+							data: {
+								"avatarUrl": wxUserInfo.avatarUrl,
+								"nickName": wxUserInfo.nickName,
+								"whichMP": 1,
+								"qq": 'lee79914194'
+
+
+							},
+							success: (res) => {
+								console.log(res)
+							}
+						});
+					}
+				})
+			},
 			formSubmit(e) {
 				let username = e.detail.value.username;
 				let password = e.detail.value.password;
@@ -79,7 +110,7 @@
 							uni.switchTab({
 								url: "../me/me"
 							});
-							
+
 						} else if (status === 500) {
 							uni.showToast({
 								title: res.data.msg,

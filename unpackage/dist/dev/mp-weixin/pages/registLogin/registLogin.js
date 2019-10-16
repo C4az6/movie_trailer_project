@@ -175,9 +175,40 @@ var _default =
 {
   data: function data() {
     return {};
-
   },
   methods: {
+    wxLogin: function wxLogin(e) {var _this = this;
+      var wxUserInfo = e.detail.userInfo;
+      console.log(wxUserInfo);
+      // 实现微信登录
+      uni.login({
+        provider: "weixin",
+        success: function success(res) {
+          // console.log(res)
+          // 获得微信登录的code授权码
+          var code = res.code;
+          console.log(code);
+          uni.request({
+            url: _this.baseUrl + "/stu/mpWXLogin/".concat(code),
+            method: 'POST',
+            header: {
+              'content-type': 'application/x-www-form-urlencoded' },
+
+            data: {
+              "avatarUrl": wxUserInfo.avatarUrl,
+              "nickName": wxUserInfo.nickName,
+              "whichMP": 1,
+              "qq": 'lee79914194' },
+
+
+
+            success: function success(res) {
+              console.log(res);
+            } });
+
+        } });
+
+    },
     formSubmit: function formSubmit(e) {
       var username = e.detail.value.username;
       var password = e.detail.value.password;
