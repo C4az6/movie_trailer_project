@@ -21,7 +21,9 @@
 			</view>
 
 			<view class="set-wapper" v-if="userIsLogin">
-				<image src="../../static/icos/settings.png" class="settings"></image>
+				<navigator url="../meInfo/meInfo">
+					<image src="../../static/icos/settings.png" class="settings"></image>
+				</navigator>
 			</view>
 		</view>
 	</view>

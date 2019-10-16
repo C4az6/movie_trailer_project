@@ -6,7 +6,7 @@
 				<view class="info-words">头像</view>
 				
 				<view class="right-wapper">
-					<image src="../../static/icos/default-face.png" class="face"></image>
+					<image :src="userInfo.faceImage" class="face"></image>
 					<view class="arrow-block">
 						<image src="../../static/icos/left-gray-arrow.png" class="arrow-ico"></image>
 					</view>
@@ -24,7 +24,7 @@
 				
 				<view class="right-wapper">
 					<view class="gray-fields">
-						Next学院
+						{{userInfo.nickname}}
 					</view>
 					<view class="arrow-block">
 						<image src="../../static/icos/left-gray-arrow.png" class="arrow-ico"></image>
@@ -42,7 +42,7 @@
 				
 				<view class="right-wapper">
 					<view class="gray-fields">
-						1997/02/24
+						{{userInfo.birthday}}
 					</view>
 					<view class="arrow-block">
 						<image src="../../static/icos/left-gray-arrow.png" class="arrow-ico"></image>
@@ -59,7 +59,15 @@
 				
 				<view class="right-wapper">
 					<view class="gray-fields">
-						男
+						<view v-if="userInfo.sex == 1">
+							男
+						</view>
+						<view v-else-if="userInfo.sex == 0">
+							女
+						</view>
+						<view v-else>
+							未选择
+						</view>
 					</view>
 					<view class="arrow-block">
 						<image src="../../static/icos/left-gray-arrow.png" class="arrow-ico"></image>
@@ -83,7 +91,7 @@
 	export default {
 		data() {
 			return {
-				
+				userInfo: {}
 			}
 		},
 		methods: {
@@ -95,6 +103,10 @@
 					duration: 1500
 				})
 			}
+		},
+		onShow() {
+			let userInfo = this.getGlobalUser('userInfo');
+			this.userInfo = userInfo;
 		}
 	}
 </script>
