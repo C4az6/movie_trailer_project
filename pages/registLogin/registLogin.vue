@@ -53,6 +53,12 @@
 								url: "../me/me"
 							});
 							
+						} else if (status === 500) {
+							uni.showToast({
+								title: res.data.msg,
+								duration: 2000,
+								image: "../../static/icos/error.png"
+							})
 						}
 					}
 				})

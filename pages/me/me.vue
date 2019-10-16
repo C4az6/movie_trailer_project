@@ -42,8 +42,8 @@
 		// 页面显示时候的生命周期函数
 		onShow(){
 			// 用户状态的切换
-			let userInfo = uni.getStorageSync("userInfo");
-			if(userInfo != null && userInfo != "" && userInfo != undefined) {
+			let userInfo = this.getGlobalUser("userInfo");
+			if(userInfo != null) {
 				this.userIsLogin = true;
 				this.userInfo = userInfo
 			}else {
