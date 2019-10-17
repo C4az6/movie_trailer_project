@@ -2,9 +2,9 @@
 	<view class="page page-fill">
 		<view class="page-block info-list">
 			<!-- 头像 -->
-			<view class="item-wapper face-line-upbottom">
+			<view class="item-wapper face-line-upbottom" @click="operator">
 				<view class="info-words">头像</view>
-				
+
 				<view class="right-wapper">
 					<image :src="userInfo.faceImage" class="face"></image>
 					<view class="arrow-block">
@@ -12,16 +12,16 @@
 					</view>
 				</view>
 			</view>
-			
+
 			<view class="line-top">
 				<view class="line"></view>
 			</view>
-			
-		<!-- 用户名 -->
+
+			<!-- 用户名 -->
 			<!-- 头像 -->
 			<view class="item-wapper">
 				<view class="info-words">昵称</view>
-				
+
 				<view class="right-wapper">
 					<view class="gray-fields">
 						{{userInfo.nickname}}
@@ -31,15 +31,15 @@
 					</view>
 				</view>
 			</view>
-			
+
 			<view class="line-top">
 				<view class="line"></view>
 			</view>
-			
+
 			<!-- 生日 -->
 			<view class="item-wapper">
 				<view class="info-words">生日</view>
-				
+
 				<view class="right-wapper">
 					<view class="gray-fields">
 						{{userInfo.birthday}}
@@ -49,14 +49,14 @@
 					</view>
 				</view>
 			</view>
-			
+
 			<view class="line-top">
 				<view class="line"></view>
 			</view>
 			<!-- 性别 -->
 			<view class="item-wapper">
 				<view class="info-words">性别</view>
-				
+
 				<view class="right-wapper">
 					<view class="gray-fields">
 						<view v-if="userInfo.sex == 1">
@@ -74,7 +74,7 @@
 					</view>
 				</view>
 			</view>
-			
+
 			<view class="line-top">
 				<view class="line"></view>
 			</view>
@@ -95,8 +95,31 @@
 			}
 		},
 		methods: {
+			// 操作头像
+			operator() {
+				let userInfo = this.getGlobalUser('userInfo');
+				console.log(userInfo);
+				uni.showActionSheet({
+					itemList: ["查看我的头像", "从相册中选择上传"],
+					success: res => {
+						console.log(res);
+						if(res.tapIndex == 0){
+							// 预览头像
+							let faceArray = []
+							faceArray.push(this.userInfo.faceImage)
+							uni.previewImage({
+								urls: faceArray,
+								current: faceArray[0]
+							})
+						} else if (res.tapIndex == 1){
+							// 选择上传头像
+							
+						}
+					}
+				});
+			},
 			// 用户退出登录
-			logout(){
+			logout() {
 				// 获取localStorage里面的用户信息
 				let userInfo = this.getGlobalUser('userInfo');
 				// 发送退出登录的请求
@@ -104,7 +127,7 @@
 					url: this.baseUrl + `/user/logout?userId=${userInfo.id}&&qq=1335436466`,
 					method: 'POST',
 					success: (res) => {
-						if(res.data.status==200){
+						if (res.data.status == 200) {
 							uni.removeStorageSync("userInfo");
 							uni.switchTab({
 								url: '../me/me'
@@ -112,10 +135,10 @@
 						}
 					}
 				})
-				
+
 			},
 			// 清理缓存按钮
-			clearStorage(){
+			clearStorage() {
 				uni.clearStorageSync();
 				uni.showToast({
 					title: "清理缓存成功",

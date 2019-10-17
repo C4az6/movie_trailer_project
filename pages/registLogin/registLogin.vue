@@ -33,9 +33,9 @@
 				<view class="thrid-icos-wapper">
 					<!-- 5+app 用qq登录 小程序用微信小程序登录h5不支持 -->
 					<!-- #ifdef APP-PLUS -->
-					<image src="../../static/icos/weixin.png" class="third-ico"></image>
-					<image src="../../static/icos/QQ.png" class="third-ico" style="margin-left: 80upx;"></image>
-					<image src="../../static/icos/weibo.png" class="third-ico" style="margin-left: 80upx;"></image>
+					<image src="../../static/icos/weixin.png" data-logintype="weixin" @click="appOAuthLogin" class="third-ico"></image>
+					<image src="../../static/icos/QQ.png" data-logintype="qq" @click="appOAuthLogin" class="third-ico" style="margin-left: 80upx;"></image>
+					<image src="../../static/icos/weibo.png" data-logintype="sinaweibo" @click="appOAuthLogin" class="third-ico" style="margin-left: 80upx;"></image>
 					<!-- #endif -->
 					<!-- #ifdef MP-WEIXIN -->
 					<button open-type="getUserInfo" @getuserinfo="wxLogin" class="third-btn-ico"></button>
@@ -53,33 +53,96 @@
 			return {}
 		},
 		methods: {
+			appOAuthLogin(e) {
+				let logintype = e.currentTarget.dataset.logintype;
+				console.log("logintype", logintype);
+				uni.login({
+					provider: logintype,
+					success: (res) => {
+						console.log("uni.login: ", JSON.stringify(res));
+						uni.getUserInfo({
+							provider: logintype,
+							success: (loginInfo) => {
+								console.log("loginInfo:", JSON.stringify(loginInfo));
+								let userInfo = loginInfo.userInfo;
+								let face = "";
+								let nickname = "";
+								let openIdOrUid = "";
+								
+								if (logintype == "weixin") {
+									face = userInfo.avatarUrl;
+									nickname = userInfo.nickName;
+									openIdOrUid = userInfo.openId;
+								} else if (logintype == "qq") {
+									face = userInfo.figureurl_qq_2;
+									nickname = userInfo.nickname;
+									openIdOrUid = userInfo.openId;
+								} else if (logintype == "sinaweibo"){
+									openIdOrUid = userInfo.id;
+									nickname = userInfo.nickname;
+									face = userInfo.avatar_large;
+								}
+								//调用开发者后台，执行一键注册或登录
+								uni.request({
+									url: this.baseUrl + `/appUnionLogin/${logintype}`,
+									method: 'POST',
+									header: {
+										'content-type': 'application/x-www-form-urlencoded'
+									},
+									data: {
+										"face": face,
+										"nickname": nickname,
+										"openIdOrUid": openIdOrUid,
+										"qq": "1335436466"
+									},
+									success: (res) => {
+										console.log("登录返回的数据：", JSON.stringify(res))
+										if(res.data.status == 200){
+											let userInfo = res.data.data;
+											// 保存用户信息到全局的缓存中
+											uni.setStorageSync("userInfo", userInfo);
+											// 切换页面跳转，使用tab切换的api
+											uni.switchTab({
+												url: '../me/me'
+											})
+										}
+									}
+								});
+								
+							}
+						})
+					}
+				})
+			},
 			wxLogin(e) {
 				let wxUserInfo = e.detail.userInfo;
-				console.log(wxUserInfo);
 				// 实现微信登录
 				uni.login({
 					provider: "weixin",
 					success: (res) => {
-						// console.log(res)
 						// 获得微信登录的code授权码
 						let code = res.code;
-						console.log(code)
+						console.log(code);
 						uni.request({
-							url: this.baseUrl + `/stu/mpWXLogin/${code}`,
+							url: this.baseUrl + `/mpWXLogin/${code}`,
 							method: 'POST',
 							header: {
 								'content-type': 'application/x-www-form-urlencoded'
 							},
 							data: {
+								"qq": '1335436466',
 								"avatarUrl": wxUserInfo.avatarUrl,
 								"nickName": wxUserInfo.nickName,
-								"whichMP": 1,
-								"qq": 'lee79914194'
-
-
+								"whichMP": 0
 							},
 							success: (res) => {
-								console.log(res)
+								let userInfo = res.data.data;
+								// 保存用户信息到全局的缓存中
+								uni.setStorageSync("userInfo", userInfo);
+								// 切换页面跳转
+								uni.switchTab({
+									url: '../me/me'
+								})
 							}
 						});
 					}
