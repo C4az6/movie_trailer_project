@@ -25,9 +25,44 @@
 			}
 		},
 		methods: {
-			// 图片上传
+			// 确认上传
 			upload(){
-				console.log('确认上传.');
+				let userInfo = this.getGlobalUser('userInfo');
+				uni.showLoading({
+					mask: true,
+					title: '正在上传,请稍后...'
+				});
+				uni.uploadFile({
+					url: this.baseUrl + `/user/uploadFace?qq=1335436466&&userId=${userInfo.id}`,
+					name: 'file',
+					filePath: this.tempFilePaths,
+					header: {
+						"headerUserId": userInfo.id,
+						"headerUserToken": userInfo.userUniqueToken
+					},
+					success: (res) => {
+						let dataRes = JSON.parse(res.data);
+						console.log(dataRes);
+						if(dataRes.status == 200){
+							let userInfo = dataRes.data;
+							// 覆盖localStorage里面的缓存数据
+							uni.setStorageSync("userInfo", userInfo);
+							// 返回到上一个页面
+							uni.navigateBack({
+								delta: 1
+							})
+						}else {
+							uni.showToast({
+								title: res.data.msg,
+								image: "../../static/icos/error.png"
+							})
+						}
+					},
+					complete: () => {
+						// 隐藏加载框
+						uni.hideLoading();
+					}
+				})
 			},
 			reSelect(){
 				// 重新选择头像
