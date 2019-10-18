@@ -54,6 +54,14 @@
             	"navigationBarBackgroundColor": "#ffd655"
             }
         }
+        ,{
+            "path" : "pages/meFace/meFace",
+            "style" : {
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "头像上传",
+				"navigationBarBackgroundColor": "#000000"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

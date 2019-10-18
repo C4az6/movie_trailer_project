@@ -98,22 +98,33 @@
 			// 操作头像
 			operator() {
 				let userInfo = this.getGlobalUser('userInfo');
-				console.log(userInfo);
 				uni.showActionSheet({
 					itemList: ["查看我的头像", "从相册中选择上传"],
 					success: res => {
-						console.log(res);
 						if(res.tapIndex == 0){
 							// 预览头像
 							let faceArray = []
 							faceArray.push(this.userInfo.faceImage)
+							// 头像预览
 							uni.previewImage({
 								urls: faceArray,
 								current: faceArray[0]
 							})
 						} else if (res.tapIndex == 1){
 							// 选择上传头像
-							
+							uni.chooseImage({
+								count: 1,
+								sizeType: ["compressed"],
+								sourceType: ["album"],
+								success: (res) => {
+									// 获得临时路径
+									let tempFilePaths = res.tempFilePaths[0];
+									// 跳转到头像图片展示页面
+									uni.navigateTo({
+										url: `../meFace/meFace?tempFilePaths=${tempFilePaths}`
+									})
+								}
+							})
 						}
 					}
 				});
