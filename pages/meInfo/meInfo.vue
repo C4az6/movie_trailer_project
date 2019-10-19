@@ -19,7 +19,7 @@
 
 			<!-- 用户名 -->
 			<!-- 头像 -->
-			<view class="item-wapper">
+			<view class="item-wapper" @click="modifyNickName">
 				<view class="info-words">昵称</view>
 
 				<view class="right-wapper">
@@ -95,6 +95,12 @@
 			}
 		},
 		methods: {
+			// 修改昵称
+			modifyNickName(){
+				uni.navigateTo({
+					url: '../meNickname/meNickname'
+				})
+			},
 			// 操作头像
 			operator() {
 				let userInfo = this.getGlobalUser('userInfo');

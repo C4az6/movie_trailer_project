@@ -8,7 +8,8 @@
     "pages/registLogin/registLogin",
     "pages/meInfo/meInfo",
     "pages/meFace/meFace",
-    "pages/faceCrop/faceCrop"
+    "pages/faceCrop/faceCrop",
+    "pages/meNickname/meNickname"
   ],
   "subPackages": [],
   "window": {
@@ -44,5 +45,5 @@
     ]
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap9.json"
+  "sitemapLocation": "sitemap55.json"
 }

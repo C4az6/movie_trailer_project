@@ -219,6 +219,12 @@ var _default =
 
   },
   methods: {
+    // 修改昵称
+    modifyNickName: function modifyNickName() {
+      uni.navigateTo({
+        url: '../meNickname/meNickname' });
+
+    },
     // 操作头像
     operator: function operator() {var _this = this;
       var userInfo = this.getGlobalUser('userInfo');

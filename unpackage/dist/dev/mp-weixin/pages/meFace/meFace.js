@@ -152,7 +152,6 @@ var _default =
     // 确认上传
     upload: function upload() {
       var userInfo = this.getGlobalUser('userInfo');
-      console.log(userInfo);
       uni.showLoading({
         mask: true,
         title: '正在上传,请稍后...' });

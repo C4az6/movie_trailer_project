@@ -28,7 +28,6 @@
 			// 确认上传
 			upload(){
 				let userInfo = this.getGlobalUser('userInfo');
-				console.log(userInfo);
 				uni.showLoading({
 					mask: true,
 					title: '正在上传,请稍后...'
