@@ -6,7 +6,9 @@
     "pages/movie/movie",
     "pages/cover/cover",
     "pages/registLogin/registLogin",
-    "pages/meInfo/meInfo"
+    "pages/meInfo/meInfo",
+    "pages/meFace/meFace",
+    "pages/faceCrop/faceCrop"
   ],
   "subPackages": [],
   "window": {
@@ -41,5 +43,6 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap9.json"
 }

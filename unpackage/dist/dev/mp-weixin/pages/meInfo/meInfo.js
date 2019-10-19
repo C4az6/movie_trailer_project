@@ -219,6 +219,47 @@ var _default =
 
   },
   methods: {
+    // 操作头像
+    operator: function operator() {var _this = this;
+      var userInfo = this.getGlobalUser('userInfo');
+      uni.showActionSheet({
+        itemList: ["查看我的头像", "从相册中选择上传"],
+        success: function success(res) {
+          if (res.tapIndex == 0) {
+            // 预览头像
+            var faceArray = [];
+            faceArray.push(_this.userInfo.faceImage);
+            // 头像预览
+            uni.previewImage({
+              urls: faceArray,
+              current: faceArray[0] });
+
+          } else if (res.tapIndex == 1) {
+            // 选择上传头像
+            uni.chooseImage({
+              count: 1,
+              sizeType: ["compressed"],
+              sourceType: ["album"],
+              success: function success(res) {
+                // 获得临时路径
+                var tempFilePaths = res.tempFilePaths[0];
+
+
+
+
+
+
+
+                uni.navigateTo({
+                  url: "../faceCrop/faceCrop?tempFilePaths=" + tempFilePaths });
+
+
+              } });
+
+          }
+        } });
+
+    },
     // 用户退出登录
     logout: function logout() {
       // 获取localStorage里面的用户信息

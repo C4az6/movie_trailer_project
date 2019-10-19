@@ -101,7 +101,7 @@
 				uni.showActionSheet({
 					itemList: ["查看我的头像", "从相册中选择上传"],
 					success: res => {
-						if(res.tapIndex == 0){
+						if (res.tapIndex == 0) {
 							// 预览头像
 							let faceArray = []
 							faceArray.push(this.userInfo.faceImage)
@@ -110,7 +110,7 @@
 								urls: faceArray,
 								current: faceArray[0]
 							})
-						} else if (res.tapIndex == 1){
+						} else if (res.tapIndex == 1) {
 							// 选择上传头像
 							uni.chooseImage({
 								count: 1,
@@ -119,10 +119,17 @@
 								success: (res) => {
 									// 获得临时路径
 									let tempFilePaths = res.tempFilePaths[0];
+									// #ifdef H5
 									// 跳转到头像图片展示页面
 									uni.navigateTo({
 										url: `../meFace/meFace?tempFilePaths=${tempFilePaths}`
 									})
+									// #endif
+									// #ifndef H5
+									uni.navigateTo({
+										url: "../faceCrop/faceCrop?tempFilePaths=" + tempFilePaths
+									})
+									// #endif 
 								}
 							})
 						}

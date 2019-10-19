@@ -28,6 +28,7 @@
 			// 确认上传
 			upload(){
 				let userInfo = this.getGlobalUser('userInfo');
+				console.log(userInfo);
 				uni.showLoading({
 					mask: true,
 					title: '正在上传,请稍后...'
@@ -42,7 +43,6 @@
 					},
 					success: (res) => {
 						let dataRes = JSON.parse(res.data);
-						console.log(dataRes);
 						if(dataRes.status == 200){
 							let userInfo = dataRes.data;
 							// 覆盖localStorage里面的缓存数据
@@ -51,9 +51,9 @@
 							uni.navigateBack({
 								delta: 1
 							})
-						}else {
+						}else if (dataRes.status == 502 || dataRes.status == 500) {
 							uni.showToast({
-								title: res.data.msg,
+								title: dataRes.msg,
 								image: "../../static/icos/error.png"
 							})
 						}

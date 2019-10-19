@@ -61,7 +61,15 @@
 				"navigationBarTitleText": "头像上传",
 				"navigationBarBackgroundColor": "#000000"
 			}
-        }
+        },
+		{
+		    "path" : "pages/faceCrop/faceCrop",
+		    "style" : {
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "头像剪裁",
+				"navigationBarBackgroundColor": "#000000"
+			}
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
