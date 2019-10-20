@@ -17,7 +17,7 @@
 				<view class="line"></view>
 			</view>
 
-			<!-- 用户名 -->
+			<!-- 昵称 -->
 			<!-- 头像 -->
 			<view class="item-wapper" @click="modifyNickName">
 				<view class="info-words">昵称</view>
@@ -37,7 +37,7 @@
 			</view>
 
 			<!-- 生日 -->
-			<view class="item-wapper">
+			<view class="item-wapper" @click="modifyBirthday">
 				<view class="info-words">生日</view>
 
 				<view class="right-wapper">
@@ -54,7 +54,7 @@
 				<view class="line"></view>
 			</view>
 			<!-- 性别 -->
-			<view class="item-wapper">
+			<view class="item-wapper" @click="modifyGender">
 				<view class="info-words">性别</view>
 
 				<view class="right-wapper">
@@ -95,6 +95,18 @@
 			}
 		},
 		methods: {
+			// 修改性别
+			modifyGender(){
+				uni.navigateTo({
+					url: '../meGender/meGender'
+				})
+			},
+			// 修改生日
+			modifyBirthday(){
+				uni.navigateTo({
+					url: '../meBirthday/meBirthday'
+				})
+			},
 			// 修改昵称
 			modifyNickName(){
 				uni.navigateTo({

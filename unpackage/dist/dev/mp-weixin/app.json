@@ -9,7 +9,9 @@
     "pages/meInfo/meInfo",
     "pages/meFace/meFace",
     "pages/faceCrop/faceCrop",
-    "pages/meNickname/meNickname"
+    "pages/meNickname/meNickname",
+    "pages/meBirthday/meBirthday",
+    "pages/meGender/meGender"
   ],
   "subPackages": [],
   "window": {
@@ -44,6 +46,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap55.json"
+  "usingComponents": {}
 }

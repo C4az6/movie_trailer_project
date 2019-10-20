@@ -1,0 +1,35 @@
+
+.page-fill {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+.gender-input {
+	background-color: white;
+	height: 80rpx;
+	line-height: 40rpx;
+	padding-left: 20rpx;
+}
+.submit-btn {
+	margin-top: 40rpx;
+	width: 90%;
+}
+.radio-sex {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+}
+.radio-single {
+	padding: 20rpx;
+}
+.line {
+	height: 1px;
+	background-color: #DBDBDA;
+}
+

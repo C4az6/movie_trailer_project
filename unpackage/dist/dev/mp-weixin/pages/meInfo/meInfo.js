@@ -219,6 +219,18 @@ var _default =
 
   },
   methods: {
+    // 修改性别
+    modifyGender: function modifyGender() {
+      uni.navigateTo({
+        url: '../meGender/meGender' });
+
+    },
+    // 修改生日
+    modifyBirthday: function modifyBirthday() {
+      uni.navigateTo({
+        url: '../meBirthday/meBirthday' });
+
+    },
     // 修改昵称
     modifyNickName: function modifyNickName() {
       uni.navigateTo({
